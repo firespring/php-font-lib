@@ -361,22 +361,35 @@ class File extends BinaryStream {
     $afm->write($file, $encoding);
   }
 
-  /**
-   * Get a specific name table string value from its ID
-   *
-   * @param int $nameID The name ID
-   *
-   * @return string|null
-   */
-  function getNameTableString($nameID) {
-    /** @var nameRecord[] $records */
-    $records = $this->getData("name", "records");
+	/**
+	 * Get a specific name table string value from its ID
+	 *
+	 * @param int $nameID The name ID
+	 * @param int|null    $languageID
+	 *
+	 * @return string|null
+	 */
+  function getNameTableString($nameID, $languageID = NULL) {
+	  /** @var nameRecord[] $records */
+	  $records = $this->getData("name", "records");
 
-    if (!isset($records[$nameID])) {
-      return null;
-    }
+	  if (!isset($records[$nameID])) {
+		  return NULL;
+	  }
 
-    return $records[$nameID]->string;
+	  $string = NULL;
+	  foreach ($records as $record) {
+		  if ($record instanceof nameRecord && $record->nameID === $nameID) {
+			  if (is_null($languageID)) {
+				  $string = $record->string;
+			  } elseif ($record->languageID === $languageID) {
+				  $string = $record->string;
+				  break;
+			  }
+		  }
+	  }
+
+	  return $string;
   }
 
   /**
@@ -388,13 +401,15 @@ class File extends BinaryStream {
     return $this->getNameTableString(name::NAME_COPYRIGHT);
   }
 
-  /**
-   * Get font name
-   *
-   * @return string|null
-   */
-  function getFontName() {
-    return $this->getNameTableString(name::NAME_NAME);
+	/**
+	 * Get font name
+	 *
+	 * @param int|null $languageID
+	 *
+	 * @return string|null
+	 */
+  function getFontName($languageID = NULL) {
+    return $this->getNameTableString(name::NAME_NAME, $languageID);
   }
 
   /**

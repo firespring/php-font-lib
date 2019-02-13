@@ -43,6 +43,8 @@ class name extends Table {
   const NAME_COMPAT_FULL_NAME   = 18;
   const NAME_SAMPLE_TEXT        = 19;
 
+  const LANGUAGE_EN_US = 1033;
+
   static $nameIdCodes = array(
     0  => "Copyright",
     1  => "FontName",
@@ -155,7 +157,7 @@ class name extends Table {
       $font->seek($tableOffset + $data["stringOffset"] + $record->offset);
       $s                      = $font->read($record->length);
       $record->string         = Font::UTF16ToUTF8($s);
-      $names[$record->nameID] = $record;
+      $names[] = $record;
     }
 
     $data["records"] = $names;
