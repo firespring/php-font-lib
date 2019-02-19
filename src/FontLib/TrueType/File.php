@@ -392,13 +392,15 @@ class File extends BinaryStream {
 	  return $string;
   }
 
-  /**
-   * Get font copyright
-   *
-   * @return string|null
-   */
-  function getFontCopyright() {
-    return $this->getNameTableString(name::NAME_COPYRIGHT);
+	/**
+	 * Get font copyright
+	 *
+	 * @param int|null $languageID
+	 *
+	 * @return string|null
+	 */
+  function getFontCopyright($languageID = NULL) {
+    return $this->getNameTableString(name::NAME_COPYRIGHT, $languageID);
   }
 
 	/**
@@ -412,40 +414,48 @@ class File extends BinaryStream {
     return $this->getNameTableString(name::NAME_NAME, $languageID);
   }
 
-  /**
-   * Get font subfamily
-   *
-   * @return string|null
-   */
-  function getFontSubfamily() {
-    return $this->getNameTableString(name::NAME_SUBFAMILY);
+	/**
+	 * Get font subfamily
+	 *
+	 * @param int|null $languageID
+	 *
+	 * @return string|null
+	 */
+  function getFontSubfamily($languageID = NULL) {
+    return $this->getNameTableString(name::NAME_SUBFAMILY, $languageID);
   }
 
-  /**
-   * Get font subfamily ID
-   *
-   * @return string|null
-   */
-  function getFontSubfamilyID() {
-    return $this->getNameTableString(name::NAME_SUBFAMILY_ID);
+	/**
+	 * Get font subfamily ID
+	 *
+	 * @param int|null $languageID
+	 *
+	 * @return string|null
+	 */
+  function getFontSubfamilyID($languageID = NULL) {
+    return $this->getNameTableString(name::NAME_SUBFAMILY_ID, $languageID);
   }
 
-  /**
-   * Get font full name
-   *
-   * @return string|null
-   */
-  function getFontFullName() {
-    return $this->getNameTableString(name::NAME_FULL_NAME);
+	/**
+	 * Get font full name
+	 *
+	 * @param int|null $languageID
+	 *
+	 * @return string|null
+	 */
+  function getFontFullName($languageID = NULL) {
+    return $this->getNameTableString(name::NAME_FULL_NAME, $languageID);
   }
 
-  /**
-   * Get font version
-   *
-   * @return string|null
-   */
-  function getFontVersion() {
-    return $this->getNameTableString(name::NAME_VERSION);
+	/**
+	 * Get font version
+	 *
+	 * @param int|null $languageID
+	 *
+	 * @return string|null
+	 */
+  function getFontVersion($languageID = NULL) {
+    return $this->getNameTableString(name::NAME_VERSION, $languageID);
   }
 
   /**
@@ -457,13 +467,15 @@ class File extends BinaryStream {
     return $this->getTableObject("OS/2")->data["usWeightClass"];
   }
 
-  /**
-   * Get font Postscript name
-   *
-   * @return string|null
-   */
-  function getFontPostscriptName() {
-    return $this->getNameTableString(name::NAME_POSTSCRIPT_NAME);
+	/**
+	 * Get font Postscript name
+	 *
+	 * @param int|null $languageID
+	 *
+	 * @return string|null
+	 */
+  function getFontPostscriptName($languageID = NULL) {
+    return $this->getNameTableString(name::NAME_POSTSCRIPT_NAME, $languageID);
   }
 
   function reduce() {
